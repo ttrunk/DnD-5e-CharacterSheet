@@ -1,0 +1,13 @@
+Can cast 4 spells a day.
+
+Cantrips:
+Minor Illusion
+Viscous Mockery
+
+Level 1 Spells:
+Identify
+Thunderwave
+Faerie Fire
+Bane
+Detect Magic
+Cure Wounds

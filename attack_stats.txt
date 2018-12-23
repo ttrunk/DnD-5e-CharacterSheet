@@ -1,0 +1,1 @@
+Pistol|Rapier|Dagger|||+5 (range 30/90)|+5|+5 (range (20/40)|||1d10 +3|1d8 +3|1d4 +3||

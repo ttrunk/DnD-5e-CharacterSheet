@@ -1,0 +1,9 @@
+Flame Tonuge Long Sword+3: 1d10 + 2d6.
+
+Skull Crusher: Has advantage in mountainous terrain. Kills opponent instantly with a crit if their HP is less than 50. The (+1d6) is cold damage. 
+
+Hammer of Thunderbolts:
+Brings my strength up to 30. When I roll a Crititcal against a Giant they must make dc17 con save or die. Hammer has 1d4+1 charges a day, expending a charge is a ranged attack hurling it with a normal range of 20 feet and a long range of 60 feet. If attack hits a thunderclap audible out to 300 feet is released. Target and every creature within 30 feet must exceed dc17 con save or be stunned utnil the end of my next turn. 
+
+Giant Slayer:
+Giant takes and extra 2d6 damage upon hit and must exceed dc15 strength throw or fall prone. Works on any giant like fire,trolls, cyclops, goliaths, etc. 

@@ -1,0 +1,11 @@
+Spell Save DC: 14 (8 + proficiency + charisma)
+
+Spell Attach: 6 (proficiency + Charisma)
+
+Used 2 inspiration
+Used 1 Spells
+ 
+Everyones AC is 15 (for cunning words)
+
+test
+test

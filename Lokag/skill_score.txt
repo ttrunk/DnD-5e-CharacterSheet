@@ -1,0 +1,1 @@
+16|true|0|false|0|false|16|true|0|false|0|false|0|false|6|true|0|false|0|false|0|false|6|true|0|false|0|false|0|false|2|false|2|false|6|true|13
