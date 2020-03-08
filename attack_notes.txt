@@ -1,12 +1,34 @@
-Spell Save DC: 14 (8 + proficiency + charisma)
+LEVEL UP TO 19!!!!!!!!!!!!!!!!!!!!!!!!
+Spell Save DC: 20 (8 + proficiency + charisma)
 
-Spell Attach: 6 (proficiency + Charisma)
+Barry HP: 136/136
+B-Link HP: 22/22
 
-Used 2 inspiration
-Used 1 Spells
- 
-Everyones AC is 15 (for cunning words)
+Magic berries: 259
 
-test
-test
-test
+Spell Attack: 12+3 (proficiency + Charisma + Wand of War Mage)
+
+Lucky: 2/3
+
+Insp/Cut(d12): 1/6
+1st lvl: 4/4
+2nd lvl: 2/3
+3rd lvl: 2/3
+4th lvl: 2/3
+5th lvl: 3/3(extra from dragon)
+6th lvl: 0/2
+7th lvl: 0/1
+8th lvl: 0/1
+9th lvl: 0/1
+
+Ammunition:
+Adamantine Bullets (490)
++1 bullets (9) (+1 to damage and attack)
++3 bullets (10) (+3 to damage and attack)
+Grenade(0) 5d6 piercing. 1/2 if they save(dex)    Can throw 60 feet. radious 20 feet. 
+
+Poison:
+Serpant venom: 3/3 applications - 3d6 poison dmg
+1/2 on save DC:13
+
+Scorpion poison: 2 d10 - Con save DC: 12 (x2)

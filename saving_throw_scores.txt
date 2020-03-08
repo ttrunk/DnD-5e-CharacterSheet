@@ -1,1 +1,1 @@
-2|false|5|true|2|false|0|false|1|false|6|true
+(5)2|false|10|true|(4)2|false|(4)0|false|2|false|12|true

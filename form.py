@@ -2,40 +2,98 @@ from tkinter import *
 from DndConfig import DnDConfig
 import csv
 import random
+import math
+from tkinter import messagebox
+import os.path
+import re
+
+
+def get_init_color():
+    """
+    initializes color for use in root window setup
+    """
+    my_file_config = DnDConfig()
+    color_file = my_file_config.color_file()
+
+    init_color_file = open(color_file, 'r+')
+
+    color = init_color_file.read()
+    if color == "":
+        color = 'grey'
+    return color
+
+
+def get_init_color_2():
+    """
+    initializes color for use in secondary window setup
+    """
+    my_file_config = DnDConfig()
+    color_file_2 = my_file_config.color_file_2()
+
+    init_color_file_2 = open(color_file_2, 'r+')
+
+    color2 = init_color_file_2.read()
+    if color2 == "":
+        color2 = 'grey'
+    return color2
+
+def get_init_image():
+    """
+    initializes image for use in root window
+    """
+    my_file_config = DnDConfig()
+    image_file = my_file_config.image_file()
+
+    init_image_file = open(image_file, 'r+')
+
+    img = init_image_file.read()
+    return img
+
 
 """Creates Main Window"""
 root = Tk()
 root.title("D&D 5e Player Character Sheet")
-root.geometry("900x725")
-root.configure(background='#c5cfd8')
-img = PhotoImage(file="C:/Users/User/PycharmProjects/DnD-5e-CharacterSheet/lokagsmall.ppm")
+root.geometry("900x740")
+root.configure(background=get_init_color())
+img = PhotoImage(file=get_init_image())
 displayImg = Label(image=img)
-displayImg.place(x=760, y=12)
-
+displayImg.place(x=756, y=12)
 
 """Creates Secondary Window"""
 featuresAndTraitsWin = Toplevel(root)
 featuresAndTraitsWin.title("Features & Traits")
 featuresAndTraitsWin.geometry("1550x775")
-featuresAndTraitsWin.configure(background='#d1d1d1')
+featuresAndTraitsWin.configure(background=get_init_color_2())
 
 """Creates Dice Window"""
 diceWin = Toplevel(root)
 diceWin.title("Dice")
 diceWin.geometry("500x500")
-#diceWin.configure(background='#d1d1d1')
+
+
+def verify_image_exists():
+    """
+    verifies image exists before saving the image path provider by user
+    :return:
+    """
+    if (os.path.exists(imagePath.get())):
+        valid_image = 1
+    else:
+        valid_image = 0
+    return valid_image
+
 
 def calc_mods():
     """
     Calculates ability modifiers based off ability scores
     """
 
-    strengthAttVar = int(strengthAttField.get())
-    dexAttVar = int(dexAttField.get())
-    conAttVar = int(conAttField.get())
-    intAttVar = int(intAttField.get())
-    wisAttVar = int(wisAttField.get())
-    charAttVar = int(charAttField.get())
+    strengthAttVar = strengthAttField.get()
+    dexAttVar = dexAttField.get()
+    conAttVar = conAttField.get()
+    intAttVar = intAttField.get()
+    wisAttVar = wisAttField.get()
+    charAttVar = charAttField.get()
 
     strengthModField.delete(0, END)
     dexModField.delete(0, END)
@@ -44,138 +102,38 @@ def calc_mods():
     wisModField.delete(0, END)
     charModField.delete(0, END)
 
-    if strengthAttVar <= 11:
-        strengthModVar = 0
-    elif strengthAttVar <= 13:
-        strengthModVar = 1
-    elif strengthAttVar <= 15:
-        strengthModVar = 2
-    elif strengthAttVar <= 17:
-        strengthModVar = 3
-    elif strengthAttVar <= 19:
-        strengthModVar = 4
-    elif strengthAttVar <= 21:
-        strengthModVar = 5
-    elif strengthAttVar <= 23:
-        strengthModVar = 6
-    elif strengthAttVar <= 25:
-        strengthModVar = 7
-    elif strengthAttVar <= 27:
-        strengthModVar = 8
-    elif strengthAttVar <= 29:
-        strengthModVar = 9
+    try:
+        intStrengthAttVar = int(strengthAttVar)
+        modStrengthAttVar = (intStrengthAttVar - 10) / 2
+        rmodStrengthAttVar = math.floor(modStrengthAttVar)
+        strengthModField.insert(0, rmodStrengthAttVar)
 
-    if dexAttVar <= 11:
-        dexModVar = 0
-    elif dexAttVar <= 13:
-        dexModVar = 1
-    elif dexAttVar <= 15:
-        dexModVar = 2
-    elif dexAttVar <= 17:
-        dexModVar = 3
-    elif dexAttVar <= 19:
-        dexModVar = 4
-    elif dexAttVar <= 21:
-        dexModVar = 5
-    elif dexAttVar <= 23:
-        dexModVar = 6
-    elif dexAttVar <= 25:
-        dexModVar = 7
-    elif dexAttVar <= 27:
-        dexModVar = 8
-    elif dexAttVar <= 29:
-        dexModVar = 9
+        intDexAttVar = int(dexAttVar)
+        modDexAttVar = (intDexAttVar - 10) / 2
+        rmodDexAttVar = math.floor(modDexAttVar)
+        dexModField.insert(0, rmodDexAttVar)
 
-    if conAttVar <= 11:
-        conModVar = 0
-    elif conAttVar <= 13:
-        conModVar = 1
-    elif conAttVar <= 15:
-        conModVar = 2
-    elif conAttVar <= 17:
-       conModVar = 3
-    elif conAttVar <= 19:
-        conModVar = 4
-    elif conAttVar <= 21:
-        conModVar = 5
-    elif conAttVar <= 23:
-        conModVar = 6
-    elif conAttVar <= 25:
-        conModVar = 7
-    elif conAttVar <= 27:
-        conModVar = 8
-    elif conAttVar <= 29:
-        conModVar = 9
+        intConAttVar = int(conAttVar)
+        modConAttVar = (intConAttVar - 10) / 2
+        rmodConAttVar = math.floor(modConAttVar)
+        conModField.insert(0, rmodConAttVar)
 
-    if intAttVar <= 11:
-        intModVar = 0
-    elif intAttVar <= 13:
-        intModVar = 1
-    elif intAttVar <= 15:
-        intModVar = 2
-    elif intAttVar <= 17:
-       intModVar = 3
-    elif intAttVar <= 19:
-        intModVar = 4
-    elif intAttVar <= 21:
-        intModVar = 5
-    elif intAttVar <= 23:
-        intModVar = 6
-    elif intAttVar <= 25:
-        intModVar = 7
-    elif intAttVar <= 27:
-        intModVar = 8
-    elif intAttVar <= 29:
-        intModVar = 9
+        intIntAttVar = int(intAttVar)
+        modIntAttVar = (intIntAttVar - 10) / 2
+        rmodIntAttVar = math.floor(modIntAttVar)
+        intModField.insert(0, rmodIntAttVar)
 
-    if wisAttVar <= 11:
-        wisModVar = 0
-    elif wisAttVar <= 13:
-        wisModVar = 1
-    elif wisAttVar <= 15:
-        wisModVar = 2
-    elif wisAttVar <= 17:
-       wisModVar = 3
-    elif wisAttVar <= 19:
-        wisModVar = 4
-    elif wisAttVar <= 21:
-        wisModVar = 5
-    elif wisAttVar <= 23:
-        wisModVar = 6
-    elif wisAttVar <= 25:
-        wisModVar = 7
-    elif wisAttVar <= 27:
-        wisModVar = 8
-    elif wisAttVar <= 29:
-        wisModVar = 9
+        intWisAttVar = int(wisAttVar)
+        modWisAttVar = (intWisAttVar - 10) / 2
+        rmodWisAttVar = math.floor(modWisAttVar)
+        wisModField.insert(0, rmodWisAttVar)
 
-    if charAttVar <= 11:
-        charModVar = 0
-    elif charAttVar <= 13:
-        charModVar = 1
-    elif charAttVar <= 15:
-        charModVar = 2
-    elif charAttVar <= 17:
-       charModVar = 3
-    elif charAttVar <= 19:
-        charModVar = 4
-    elif charAttVar <= 21:
-        charModVar = 5
-    elif charAttVar <= 23:
-        charModVar = 6
-    elif charAttVar <= 25:
-        charModVar = 7
-    elif charAttVar <= 27:
-        charModVar = 8
-    elif charAttVar <= 29:
-        charModVar = 9
-
-    strengthModField.insert(0, strengthModVar)
-    dexModField.insert(0, dexModVar)
-    conModField.insert(0, conModVar)
-    intModField.insert(0, intModVar)
-    wisModField.insert(0, wisModVar)
-    charModField.insert(0, charModVar)
+        intCharAttVar = int(charAttVar)
+        modCharAttVar = (intCharAttVar - 10) / 2
+        rmodCharAttVar = math.floor(modCharAttVar)
+        charModField.insert(0, rmodCharAttVar)
+    except ValueError:
+        messagebox.showerror("Error", "All ability scores are required to calculate modifiers")
 
 
 def save_character_traits():
@@ -829,6 +787,9 @@ def get_per_traits():
     personalityTraitsBox.insert(END, per_traits)
 
 def save_bonds():
+    """
+    saves value from bonds text box to a file
+    """
     my_file_config = DnDConfig()
     bonds_file = my_file_config.bonds_file()
 
@@ -840,6 +801,9 @@ def save_bonds():
         write_bonds_file.flush()
 
 def get_bonds():
+    """
+    populates bonds traits text box with value from file
+    """
     my_file_config = DnDConfig()
     bonds_file = my_file_config.bonds_file()
 
@@ -849,6 +813,9 @@ def get_bonds():
     bondsBox.insert(END, bonds)
 
 def save_ideals():
+    """
+    saves value from ideals text box to a file
+    """
     my_file_config = DnDConfig()
     ideals_file = my_file_config.ideals_file()
 
@@ -860,6 +827,9 @@ def save_ideals():
         write_ideals_file.flush()
 
 def get_ideals():
+    """
+    populates ideals traits text box with value from file
+    """
     my_file_config = DnDConfig()
     ideals_file = my_file_config.ideals_file()
 
@@ -869,6 +839,9 @@ def get_ideals():
     idealsBox.insert(END, ideals)
 
 def save_flaws():
+    """
+    saves value from flaws text box to a file
+    """
     my_file_config = DnDConfig()
     flaws_file = my_file_config.flaws_file()
 
@@ -880,6 +853,9 @@ def save_flaws():
         write_flaws_file.flush()
 
 def get_flaws():
+    """
+    populates flaws text box with value from file
+    """
     my_file_config = DnDConfig()
     flaws_file = my_file_config.flaws_file()
 
@@ -889,6 +865,9 @@ def get_flaws():
     flawsBox.insert(END, flaws)
 
 def save_prof_lang():
+    """
+    saves value from languages text box to a file
+    """
     my_file_config = DnDConfig()
     prof_lang_file = my_file_config.prof_lang_file()
 
@@ -900,6 +879,9 @@ def save_prof_lang():
         write_prof_lang_file.flush()
 
 def get_prof_lang():
+    """
+    populates languages text box with value from file
+    """
     my_file_config = DnDConfig()
     prof_lang_file = my_file_config.prof_lang_file()
 
@@ -909,6 +891,9 @@ def get_prof_lang():
     otherProfLanguagesBox.insert(END, prof_lang)
 
 def save_all_org():
+    """
+    saves value from organizations text box to a file
+    """
     my_file_config = DnDConfig()
     all_org_file = my_file_config.all_org_file()
 
@@ -920,6 +905,9 @@ def save_all_org():
         write_all_org_file.flush()
 
 def get_all_org():
+    """
+    populates organizations text box with value from file
+    """
     my_file_config = DnDConfig()
     all_org_file = my_file_config.all_org_file()
 
@@ -928,7 +916,111 @@ def get_all_org():
     all_org = init_all_org_file.read()
     alliesandOrgsBox.insert(END, all_org)
 
+def save_image():
+    """
+    saves value from image path text box to a file
+    """
+    my_file_config = DnDConfig()
+    image_file = my_file_config.image_file()
+
+    image_path = imagePath.get()
+
+    with open(image_file, "r+") as write_image_file:
+        write_image_file.truncate()
+        write_image_file.write(image_path)
+        write_image_file.flush()
+
+def get_image():
+    """
+    populates image path text box with value from file
+    """
+    my_file_config = DnDConfig()
+    image_file = my_file_config.image_file()
+
+    init_image_file = open(image_file, 'r+')
+
+    image_path = init_image_file.read()
+
+    imagePath.insert(END, image_path)
+
+
+def save_color():
+    """
+    saves value from color root text box to a file
+    """
+    my_file_config = DnDConfig()
+    color_file = my_file_config.color_file()
+    color_file_2 = my_file_config.color_file_2()
+
+    hexval1 = hexColorField1.get()
+    match1 = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', hexval1)
+    if match1:
+        with open(color_file, "r+") as write_color_file:
+            write_color_file.truncate()
+            write_color_file.write(hexval1)
+            write_color_file.flush()
+    else:
+        messagebox.showerror("Error", "Not a valid Hex value. New value not saved. Old value retained.")
+
+    hexval2 = hexColorField2.get()
+    match2 = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', hexval2)
+    if match2:
+        with open(color_file_2, "r+") as write_color_file_2:
+            write_color_file_2.truncate()
+            write_color_file_2.write(hexval2)
+            write_color_file_2.flush()
+    else:
+        messagebox.showerror("Error", "Not a valid Hex value. New value not saved. Old value retained2.")
+
+def get_color():
+    """
+    populates color root text box with value from file
+    """
+    my_file_config = DnDConfig()
+    color_file = my_file_config.color_file()
+    color_file_2 = my_file_config.color_file_2()
+
+    init_color_file = open(color_file, 'r+')
+    init_color_file_2 = open(color_file_2, 'r+')
+
+    color = init_color_file.read()
+    color2 = init_color_file_2.read()
+    hexColorField1.insert(END, color)
+    hexColorField2.insert(END, color2)
+
+def get_sec_init_color():
+    """
+    initializes root color for labels
+    """
+    my_file_config = DnDConfig()
+    color_file = my_file_config.color_file()
+
+    init_color_file = open(color_file, 'r+')
+
+    color = init_color_file.read()
+    if color == "":
+        color = 'grey'
+    return color
+
+def get_sec_init_color_2():
+    """
+    initializes secondary color for labels
+    """
+    my_file_config = DnDConfig()
+    color_file_2 = my_file_config.color_file_2()
+
+    init_color_file_2 = open(color_file_2, 'r+')
+
+    color2 = init_color_file_2.read()
+    if color2 == "":
+        color2 = 'grey'
+    return color2
+
+
 def save_feat_trait():
+    """
+    saves value from feats text box to a file
+    """
     my_file_config = DnDConfig()
     feat_trait_file = my_file_config.feat_trait_file()
 
@@ -940,6 +1032,9 @@ def save_feat_trait():
         write_feat_trait_file.flush()
 
 def get_feat_trait():
+    """
+    populates feat text box with value from file
+    """
     my_file_config = DnDConfig()
     feat_trait_file = my_file_config.feat_trait_file()
 
@@ -949,6 +1044,9 @@ def get_feat_trait():
     featuresAndTraitsBox.insert(END, feat_trait)
 
 def save_equip():
+    """
+    saves value from equipment text box to a file
+    """
     my_file_config = DnDConfig()
     equip_file = my_file_config.equip_file()
 
@@ -960,6 +1058,9 @@ def save_equip():
         write_equip_file.flush()
 
 def get_equip():
+    """
+    populates feat text box with value from file
+    """
     my_file_config = DnDConfig()
     equip_file = my_file_config.equip_file()
 
@@ -969,6 +1070,9 @@ def get_equip():
     equipmentBox.insert(END, equip)
 
 def save_treasure():
+    """
+    saves value from treasure text box to a file
+    """
     my_file_config = DnDConfig()
     treasure_file = my_file_config.treasure_file()
 
@@ -980,6 +1084,9 @@ def save_treasure():
         write_treasure_file.flush()
 
 def get_treasure():
+    """
+    populates treasure text box with value from file
+    """
     my_file_config = DnDConfig()
     treasure_file = my_file_config.treasure_file()
 
@@ -989,6 +1096,9 @@ def get_treasure():
     treasureBox.insert(END, treasure)
 
 def save_misc():
+    """
+    saves value from misc text box to a file
+    """
     my_file_config = DnDConfig()
     misc_file = my_file_config.misc_file()
 
@@ -1000,6 +1110,9 @@ def save_misc():
         write_misc_file.flush()
 
 def get_misc():
+    """
+    populates misc text box with value from file
+    """
     my_file_config = DnDConfig()
     misc_file = my_file_config.misc_file()
 
@@ -1009,6 +1122,9 @@ def get_misc():
     miscBox.insert(END, misc)
 
 def save_other():
+    """
+    saves value from other text boxes to a file
+    """
     my_file_config = DnDConfig()
     other_file = my_file_config.other_file()
     ageEntry = ageField.get()
@@ -1032,6 +1148,9 @@ def save_other():
         write_other_file.flush()
 
 def get_other():
+    """
+    populates other text boxes with value from file
+    """
     my_file_config = DnDConfig()
     other = my_file_config.other_file()
 
@@ -1079,7 +1198,10 @@ def load_all():
     get_treasure()
     get_misc()
     get_other()
+    get_color()
+    get_image()
     loadButton.config(state=DISABLED)
+    saveButton.config(state=NORMAL)
 
 
 def save_all():
@@ -1109,9 +1231,18 @@ def save_all():
         save_treasure()
         save_misc()
         save_other()
+        save_color()
+        if (verify_image_exists()):
+            save_image()
+        else:
+            messagebox.showerror("Error", "File path not valid. New file path was not saved. Old value was retained.")
 
 
 def d4dice():
+    """
+    Grabs value from D4 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d4ResultsBox.delete(0, END)
     d4AddEntry.delete(0, END)
     d4s = d4Entry.get()
@@ -1129,6 +1260,10 @@ def d4dice():
     d4AddEntry.insert(0, d4sMath)
 
 def d6dice():
+    """
+    Grabs value from D6 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d6ResultsBox.delete(0, END)
     d6AddEntry.delete(0, END)
     d6s = d6Entry.get()
@@ -1146,6 +1281,10 @@ def d6dice():
     d6AddEntry.insert(0, d6sMath)
 
 def d8dice():
+    """
+    Grabs value from D8 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d8ResultsBox.delete(0, END)
     d8AddEntry.delete(0, END)
     d8s = d8Entry.get()
@@ -1163,6 +1302,10 @@ def d8dice():
     d8AddEntry.insert(0, d8sMath)
 
 def d10dice():
+    """
+    Grabs value from D10 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d10ResultsBox.delete(0, END)
     d10AddEntry.delete(0, END)
     d10s = d10Entry.get()
@@ -1181,6 +1324,10 @@ def d10dice():
 
 
 def d12dice():
+    """
+    Grabs value from D12 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d12ResultsBox.delete(0, END)
     d12AddEntry.delete(0, END)
     d12s = d12Entry.get()
@@ -1198,6 +1345,10 @@ def d12dice():
     d12AddEntry.insert(0, d12sMath)
 
 def d20dice():
+    """
+    Grabs value from D20 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d20ResultsBox.delete(0, END)
     d20AddEntry.delete(0, END)
     d20s = d20Entry.get()
@@ -1215,6 +1366,10 @@ def d20dice():
     d20AddEntry.insert(0, d20sMath)
 
 def d100dice():
+    """
+    Grabs value from D100 dice box and randomizes that many integers between the possible min and max values of the die
+    Individual die roll values are populated and the sum of these values are populaes in the total box
+    """
     d100ResultsBox.delete(0, END)
     d100AddEntry.delete(0, END)
     d100s = d100Entry.get()
@@ -1340,34 +1495,39 @@ d100AddEntry = Entry(diceWin, width=5)
 d100AddEntry.place(x=365, y=300)
 
 
-chNameLbl = Label(root, text="Character Name", bg='#c5cfd8')
+imagePath = Entry(root, width=52)
+imageLbl = Label(root,text="Full Image Path:", bg=get_sec_init_color())
+imageMaxLbl = Label(root,text="Max Height = 160 Max Width = 135", bg=get_sec_init_color())
+hexColorField1 = Entry(root)
+hexColorLbl1 = Label(root, text="Background Color (hex)", bg=get_sec_init_color())
+chNameLbl = Label(root, text="Character Name", bg=get_sec_init_color())
 chNameField = Entry(root)
-profBonusLbl = Label(root, text="Proficiency Bonus", bg='#c5cfd8')
+profBonusLbl = Label(root, text="Proficiency Bonus", bg=get_sec_init_color())
 profBonusField = Entry(root)
-classAndLevelLbl = Label(root, text="Class & Level", bg='#c5cfd8')
+classAndLevelLbl = Label(root, text="Class & Level", bg=get_sec_init_color())
 classAndLevelField = Entry(root)
-backgroundLbl = Label(root, text="Background", bg='#c5cfd8')
+backgroundLbl = Label(root, text="Background", bg=get_sec_init_color())
 backgroundField = Entry(root)
-playerNameLbl = Label(root, text="Player Name", bg='#c5cfd8')
+playerNameLbl = Label(root, text="Player Name", bg=get_sec_init_color())
 playerNameField = Entry(root)
-raceLbl = Label(root, text="Race", bg='#c5cfd8')
+raceLbl = Label(root, text="Race", bg=get_sec_init_color())
 raceField = Entry(root)
-alignmentLbl = Label(root, text="Alignment", bg='#c5cfd8')
+alignmentLbl = Label(root, text="Alignment", bg=get_sec_init_color())
 alignmentField = Entry(root)
-xpLbl = Label(root, text="Experience Points", bg='#c5cfd8')
+xpLbl = Label(root, text="Experience Points", bg=get_sec_init_color())
 xpField = Entry(root)
-abilityScoresLbl = Label(root, text="Ability Scores:", bg='#c5cfd8')
-strengthAttLbl = Label(root, text="Strength", bg='#c5cfd8')
+abilityScoresLbl = Label(root, text="Ability Scores:", bg=get_sec_init_color())
+strengthAttLbl = Label(root, text="Strength", bg=get_sec_init_color())
 strengthAttField = Entry(root)
-dexAttLbl = Label(root, text="Dexterity", bg='#c5cfd8')
+dexAttLbl = Label(root, text="Dexterity", bg=get_sec_init_color())
 dexAttField = Entry(root)
-conAttLbl = Label(root, text="Constitution", bg='#c5cfd8')
+conAttLbl = Label(root, text="Constitution", bg=get_sec_init_color())
 conAttField = Entry(root)
-intAttLbl = Label(root, text="Intelligence", bg='#c5cfd8')
+intAttLbl = Label(root, text="Intelligence", bg=get_sec_init_color())
 intAttField = Entry(root)
-wisAttLbl = Label(root, text="Wisdom", bg='#c5cfd8')
+wisAttLbl = Label(root, text="Wisdom", bg=get_sec_init_color())
 wisAttField = Entry(root)
-charAttLbl = Label(root, text="Charisma", bg='#c5cfd8')
+charAttLbl = Label(root, text="Charisma", bg=get_sec_init_color())
 charAttField = Entry(root)
 strengthModField = Entry(root, width=2)
 dexModField = Entry(root, width=2)
@@ -1376,19 +1536,19 @@ intModField = Entry(root, width=2)
 wisModField = Entry(root, width=2)
 charModField = Entry(root, width=2)
 modifierButton = Button(root, text="Mods", command=calc_mods)
-savingThrowsLbl = Label(root, text="Saving Throws:", bg='#c5cfd8')
+savingThrowsLbl = Label(root, text="Saving Throws:", bg=get_sec_init_color())
 strengthCheckButtonEntry = IntVar()
-strengthCheckButton = Checkbutton(root, text="Strength", variable=strengthCheckButtonEntry, bg='#c5cfd8')
+strengthCheckButton = Checkbutton(root, text="Strength", variable=strengthCheckButtonEntry, bg=get_sec_init_color())
 dexCheckButtonEntry = IntVar()
-dexCheckButton = Checkbutton(root, text="Dexterity", variable=dexCheckButtonEntry, bg='#c5cfd8')
+dexCheckButton = Checkbutton(root, text="Dexterity", variable=dexCheckButtonEntry, bg=get_sec_init_color())
 conCheckButtonEntry = IntVar()
-conCheckButton = Checkbutton(root, text="Constitution", variable=conCheckButtonEntry, bg='#c5cfd8')
+conCheckButton = Checkbutton(root, text="Constitution", variable=conCheckButtonEntry, bg=get_sec_init_color())
 intCheckButtonEntry = IntVar()
-intCheckButton = Checkbutton(root, text="Intelligence", variable=intCheckButtonEntry, bg='#c5cfd8')
+intCheckButton = Checkbutton(root, text="Intelligence", variable=intCheckButtonEntry, bg=get_sec_init_color())
 wisCheckButtonEntry = IntVar()
-wisCheckButton = Checkbutton(root, text="Wisdom", variable=wisCheckButtonEntry, bg='#c5cfd8')
+wisCheckButton = Checkbutton(root, text="Wisdom", variable=wisCheckButtonEntry, bg=get_sec_init_color())
 charCheckButtonEntry = IntVar()
-charCheckButton = Checkbutton(root, text="Charisma", variable=charCheckButtonEntry, bg='#c5cfd8')
+charCheckButton = Checkbutton(root, text="Charisma", variable=charCheckButtonEntry, bg=get_sec_init_color())
 strengthSavingThrowField = Entry(root, width=2)
 dexSavingThrowField = Entry(root, width=2)
 conSavingThrowField = Entry(root, width=2)
@@ -1397,45 +1557,46 @@ wisSavingThrowField = Entry(root, width=2)
 charSavingThrowField = Entry(root, width=2)
 saveButton = Button(root, text="Save", command=save_all)
 loadButton = Button(root, text="Load", command=load_all)
+saveButton.config(state=DISABLED)
 
 
-skillsLbl = Label(root, text="Skills:", bg='#c5cfd8')
+skillsLbl = Label(root, text="Skills:", bg=get_sec_init_color())
 acrobaticsCheckButtonEntry = IntVar()
-acrobaticsCheckButton = Checkbutton(root, text="Acrobatics", variable=acrobaticsCheckButtonEntry, bg='#c5cfd8')
+acrobaticsCheckButton = Checkbutton(root, text="Acrobatics (Dex)", variable=acrobaticsCheckButtonEntry, bg=get_sec_init_color())
 animalHandlingCheckButtonEntry = IntVar()
-animalHandlingCheckButton = Checkbutton(root, text="Animal Handling", variable=animalHandlingCheckButtonEntry, bg='#c5cfd8')
+animalHandlingCheckButton = Checkbutton(root, text="Animal Handling (Wis)", variable=animalHandlingCheckButtonEntry, bg=get_sec_init_color())
 arcanaCheckButtonEntry = IntVar()
-arcanaCheckButton = Checkbutton(root, text="Arcana", variable=arcanaCheckButtonEntry, bg='#c5cfd8')
+arcanaCheckButton = Checkbutton(root, text="Arcana (Int)", variable=arcanaCheckButtonEntry, bg=get_sec_init_color())
 athleticsCheckButtonEntry = IntVar()
-athleticsCheckButton = Checkbutton(root, text="Athletics", variable=athleticsCheckButtonEntry, bg='#c5cfd8')
+athleticsCheckButton = Checkbutton(root, text="Athletics (Str)", variable=athleticsCheckButtonEntry, bg=get_sec_init_color())
 deceptionCheckButtonEntry = IntVar()
-deceptionCheckButton = Checkbutton(root, text="Deception", variable=deceptionCheckButtonEntry, bg='#c5cfd8')
+deceptionCheckButton = Checkbutton(root, text="Deception (Cha)", variable=deceptionCheckButtonEntry, bg=get_sec_init_color())
 historyCheckButtonEntry = IntVar()
-historyCheckButton = Checkbutton(root, text="History", variable=historyCheckButtonEntry, bg='#c5cfd8')
+historyCheckButton = Checkbutton(root, text="History (Int)", variable=historyCheckButtonEntry, bg=get_sec_init_color())
 insightCheckButtonEntry = IntVar()
-insightCheckButton = Checkbutton(root, text="Insight", variable=insightCheckButtonEntry, bg='#c5cfd8')
+insightCheckButton = Checkbutton(root, text="Insight (Wis)", variable=insightCheckButtonEntry, bg=get_sec_init_color())
 intimidationCheckButtonEntry = IntVar()
-intimidationCheckButton = Checkbutton(root, text="Intimidation", variable=intimidationCheckButtonEntry, bg='#c5cfd8')
+intimidationCheckButton = Checkbutton(root, text="Intimidation (Cha)", variable=intimidationCheckButtonEntry, bg=get_sec_init_color())
 investigationCheckButtonEntry = IntVar()
-investigationCheckButton = Checkbutton(root, text="Investigation", variable=investigationCheckButtonEntry, bg='#c5cfd8')
+investigationCheckButton = Checkbutton(root, text="Investigation (Int)", variable=investigationCheckButtonEntry, bg=get_sec_init_color())
 medicineCheckButtonEntry = IntVar()
-medicineCheckButton = Checkbutton(root, text="Medicine", variable=medicineCheckButtonEntry, bg='#c5cfd8')
+medicineCheckButton = Checkbutton(root, text="Medicine (Wis)", variable=medicineCheckButtonEntry, bg=get_sec_init_color())
 natureCheckButtonEntry = IntVar()
-natureCheckButton = Checkbutton(root, text="Nature", variable=natureCheckButtonEntry, bg='#c5cfd8')
+natureCheckButton = Checkbutton(root, text="Nature (Int)", variable=natureCheckButtonEntry, bg=get_sec_init_color())
 perceptionCheckButtonEntry = IntVar()
-perceptionCheckButton = Checkbutton(root, text="Perception", variable=perceptionCheckButtonEntry, bg='#c5cfd8')
+perceptionCheckButton = Checkbutton(root, text="Perception (Wis)", variable=perceptionCheckButtonEntry, bg=get_sec_init_color())
 performanceCheckButtonEntry = IntVar()
-performanceCheckButton = Checkbutton(root, text="Performance", variable=performanceCheckButtonEntry, bg='#c5cfd8')
+performanceCheckButton = Checkbutton(root, text="Performance (Cha)", variable=performanceCheckButtonEntry, bg=get_sec_init_color())
 persuasionCheckButtonEntry = IntVar()
-persuasionCheckButton = Checkbutton(root, text="Persuasion", variable=persuasionCheckButtonEntry, bg='#c5cfd8')
+persuasionCheckButton = Checkbutton(root, text="Persuasion (Cha)", variable=persuasionCheckButtonEntry, bg=get_sec_init_color())
 religionCheckButtonEntry = IntVar()
-religionCheckButton = Checkbutton(root, text="Religion", variable=religionCheckButtonEntry, bg='#c5cfd8')
+religionCheckButton = Checkbutton(root, text="Religion (Int)", variable=religionCheckButtonEntry, bg=get_sec_init_color())
 sleightOfHangCheckButtonEntry = IntVar()
-sleightOfHangCheckButton = Checkbutton(root, text="Sleight of Hand", variable=sleightOfHangCheckButtonEntry, bg='#c5cfd8')
+sleightOfHangCheckButton = Checkbutton(root, text="Sleight of Hand (Dex)", variable=sleightOfHangCheckButtonEntry, bg=get_sec_init_color())
 stealthCheckButtonEntry = IntVar()
-stealthCheckButton = Checkbutton(root, text="Stealth", variable=stealthCheckButtonEntry, bg='#c5cfd8')
+stealthCheckButton = Checkbutton(root, text="Stealth (Dex)", variable=stealthCheckButtonEntry, bg=get_sec_init_color())
 survivalCheckButtonEntry = IntVar()
-survivalCheckButton = Checkbutton(root, text="Survival", variable=survivalCheckButtonEntry, bg='#c5cfd8')
+survivalCheckButton = Checkbutton(root, text="Survival (Wix)", variable=survivalCheckButtonEntry, bg=get_sec_init_color())
 acrobaticsField = Entry(root, width=2)
 animalHandlingField = Entry(root, width=2)
 arcanaField = Entry(root, width=2)
@@ -1455,43 +1616,43 @@ sleightOfHandField = Entry(root, width=2)
 stealthField = Entry(root, width=2)
 survivalField = Entry(root, width=2)
 
-armorClassLbl = Label(root, text="Armor Class", bg='#c5cfd8')
+armorClassLbl = Label(root, text="Armor Class", bg=get_sec_init_color())
 armorClassField = Entry(root, width=8)
-initiativeLbl = Label(root, text="Initiative", bg='#c5cfd8')
+initiativeLbl = Label(root, text="Initiative", bg=get_sec_init_color())
 initiativeField = Entry(root, width=8)
-speedLbl = Label(root, text="Speed", bg='#c5cfd8')
+speedLbl = Label(root, text="Speed", bg=get_sec_init_color())
 speedField = Entry(root, width=8)
-inspirationLbl = Label(root, text="Inspiration", bg='#c5cfd8')
+inspirationLbl = Label(root, text="Inspiration", bg=get_sec_init_color())
 inspirationField = Entry(root, width=8)
-hitPointMaxLbl = Label(root, text="Hit Points Max", bg='#c5cfd8')
+hitPointMaxLbl = Label(root, text="Hit Points Max", bg=get_sec_init_color())
 hitPointMaxField = Entry(root, width=15)
-hitPointCurrentLbl = Label(root, text="Hit Points Current", bg='#c5cfd8')
+hitPointCurrentLbl = Label(root, text="Hit Points Current", bg=get_sec_init_color())
 hitPointCurrentField = Entry(root, width=15)
-hitPointTempLbl = Label(root, text="Temporary Hit Points", bg='#c5cfd8')
+hitPointTempLbl = Label(root, text="Temporary Hit Points", bg=get_sec_init_color())
 hitPointTempField = Entry(root, width=14)
-hitDieLbl = Label(root, text="Hit Dice -", bg='#c5cfd8')
+hitDieLbl = Label(root, text="Hit Dice -", bg=get_sec_init_color())
 hitDieField = Entry(root, width=8)
-hitDieAmountLbl = Label(root, text="Amt.", bg='#c5cfd8')
+hitDieAmountLbl = Label(root, text="Amt.", bg=get_sec_init_color())
 hitDieAmountField = Entry(root, width=2)
-deathSavesLbl = Label(root, text="Death Saves", bg='#c5cfd8')
-deathSavesSuccessLbl = Label(root, text="Successes", bg='#c5cfd8')
-deathSavesFailuresLbl = Label(root, text="Failures", bg='#c5cfd8')
+deathSavesLbl = Label(root, text="Death Saves", bg=get_sec_init_color())
+deathSavesSuccessLbl = Label(root, text="Successes", bg=get_sec_init_color())
+deathSavesFailuresLbl = Label(root, text="Failures", bg=get_sec_init_color())
 successCheckButton1Entry = IntVar()
-successCheckButton1 = Checkbutton(root, text='', variable=successCheckButton1Entry, bg='#c5cfd8')
+successCheckButton1 = Checkbutton(root, text='', variable=successCheckButton1Entry, bg=get_sec_init_color())
 successCheckButton2Entry = IntVar()
-successCheckButton2 = Checkbutton(root, text='', variable=successCheckButton2Entry, bg='#c5cfd8')
+successCheckButton2 = Checkbutton(root, text='', variable=successCheckButton2Entry, bg=get_sec_init_color())
 successCheckButton3Entry = IntVar()
-successCheckButton3 = Checkbutton(root, text='', variable=successCheckButton3Entry, bg='#c5cfd8')
+successCheckButton3 = Checkbutton(root, text='', variable=successCheckButton3Entry, bg=get_sec_init_color())
 failCheckButton1Entry = IntVar()
-failCheckButton1 = Checkbutton(root, text='', variable=failCheckButton1Entry, bg='#c5cfd8')
+failCheckButton1 = Checkbutton(root, text='', variable=failCheckButton1Entry, bg=get_sec_init_color())
 failCheckButton2Entry = IntVar()
-failCheckButton2 = Checkbutton(root, text='', variable=failCheckButton2Entry, bg='#c5cfd8')
+failCheckButton2 = Checkbutton(root, text='', variable=failCheckButton2Entry, bg=get_sec_init_color())
 failCheckButton3Entry = IntVar()
-failCheckButton3 = Checkbutton(root, text='', variable=failCheckButton3Entry, bg='#c5cfd8')
-attacksLbl = Label(root, text="Attacks:", bg='#c5cfd8')
-attackNameLbl = Label(root, text="Name", bg='#c5cfd8')
-attackBonusLbl = Label(root, text="Atk Bonus", bg='#c5cfd8')
-attackDamageTypeLbl = Label(root, text="Damage/Type", bg='#c5cfd8')
+failCheckButton3 = Checkbutton(root, text='', variable=failCheckButton3Entry, bg=get_sec_init_color())
+attacksLbl = Label(root, text="Attacks:", bg=get_sec_init_color())
+attackNameLbl = Label(root, text="Name", bg=get_sec_init_color())
+attackBonusLbl = Label(root, text="Atk Bonus", bg=get_sec_init_color())
+attackDamageTypeLbl = Label(root, text="Damage/Type", bg=get_sec_init_color())
 attackNameField1 = Entry(root)
 attackNameField2 = Entry(root)
 attackNameField3 = Entry(root)
@@ -1507,9 +1668,9 @@ attackDamageTypeField2 = Entry(root)
 attackDamageTypeField3 = Entry(root)
 attackDamageTypeField4 = Entry(root)
 attackDamageTypeField5 = Entry(root)
-attackNotesLbl = Label(root, text="Attack Notes:", bg='#c5cfd8')
+attackNotesLbl = Label(root, text="Attack Notes:", bg=get_sec_init_color())
 attackNotesBox = Text(root, height=14, width=50)
-passiveWisdomLbl = Label(root, text="Passive Wisdom(Perception)", bg='#c5cfd8')
+passiveWisdomLbl = Label(root, text="Passive Wisdom(Perception)", bg=get_sec_init_color())
 passiveWisdomField = Entry(root)
 
 
@@ -1658,49 +1819,56 @@ attackDamageTypeField4.place(x=740, y=390)
 attackDamageTypeField5.place(x=740, y=415)
 attackNotesLbl.place(x=460, y=435)
 attackNotesBox.place(x=460, y=455)
+hexColorLbl1.place(x=40, y=687)
+hexColorField1.place(x=45, y=707)
+imagePath.place(x=545, y=700)
+imageLbl.place(x=450, y=700)
+imageMaxLbl.place(x=590, y=720)
 
 """Secondary Page Tkinter Elements"""
-ageLbl = Label(featuresAndTraitsWin, text="Age", bg='#d1d1d1')
-heightLbl = Label(featuresAndTraitsWin, text="Height", bg='#d1d1d1')
-weightLbl = Label(featuresAndTraitsWin, text="Weight", bg='#d1d1d1')
-eyesLbl = Label(featuresAndTraitsWin, text="Eyes", bg='#d1d1d1')
-skinLbl = Label(featuresAndTraitsWin, text="Skin", bg='#d1d1d1')
-hairLbl = Label(featuresAndTraitsWin, text="Hair", bg='#d1d1d1')
+hexColorLbl2 = Label(featuresAndTraitsWin, text="Background color (hex)", bg=get_sec_init_color_2())
+hexColorField2 = Entry(featuresAndTraitsWin)
+ageLbl = Label(featuresAndTraitsWin, text="Age", bg=get_sec_init_color_2())
+heightLbl = Label(featuresAndTraitsWin, text="Height", bg=get_sec_init_color_2())
+weightLbl = Label(featuresAndTraitsWin, text="Weight", bg=get_sec_init_color_2())
+eyesLbl = Label(featuresAndTraitsWin, text="Eyes", bg=get_sec_init_color_2())
+skinLbl = Label(featuresAndTraitsWin, text="Skin", bg=get_sec_init_color_2())
+hairLbl = Label(featuresAndTraitsWin, text="Hair", bg=get_sec_init_color_2())
 ageField = Entry(featuresAndTraitsWin)
 heightField = Entry(featuresAndTraitsWin)
 weightField = Entry(featuresAndTraitsWin)
 eyesField = Entry(featuresAndTraitsWin)
 skinField = Entry(featuresAndTraitsWin)
 hairField = Entry(featuresAndTraitsWin)
-personalityTraitsLbl = Label(featuresAndTraitsWin, text="Personality Traits", bg='#d1d1d1')
-idealsLbl = Label(featuresAndTraitsWin, text="Ideals", bg='#d1d1d1')
-bondsLbl = Label(featuresAndTraitsWin, text="Bonds", bg='#d1d1d1')
-flawsLbl = Label(featuresAndTraitsWin, text="Flaws", bg='#d1d1d1')
+personalityTraitsLbl = Label(featuresAndTraitsWin, text="Personality Traits", bg=get_sec_init_color_2())
+idealsLbl = Label(featuresAndTraitsWin, text="Ideals", bg=get_sec_init_color_2())
+bondsLbl = Label(featuresAndTraitsWin, text="Bonds", bg=get_sec_init_color_2())
+flawsLbl = Label(featuresAndTraitsWin, text="Flaws", bg=get_sec_init_color_2())
 personalityTraitsBox = Text(featuresAndTraitsWin, height=5, width=25)
 idealsBox = Text(featuresAndTraitsWin, height=5, width=25)
 bondsBox = Text(featuresAndTraitsWin, height=5, width=25)
 flawsBox = Text(featuresAndTraitsWin, height=5, width=25)
-featuresAndTraitsLbl = Label(featuresAndTraitsWin, text="Features & Traits", bg='#d1d1d1')
+featuresAndTraitsLbl = Label(featuresAndTraitsWin, text="Features & Traits", bg=get_sec_init_color_2())
 featuresAndTraitsBox = Text(featuresAndTraitsWin, height=42, width=38)
-otherProfLanguagesLbl = Label(featuresAndTraitsWin, text="Other Proficiencies & Languages", bg='#d1d1d1')
+otherProfLanguagesLbl = Label(featuresAndTraitsWin, text="Other Proficiencies & Languages", bg=get_sec_init_color_2())
 otherProfLanguagesBox = Text(featuresAndTraitsWin, height=20, width=25)
-alliesAndOrgsLbl = Label(featuresAndTraitsWin, text="Allies & Organizations", bg='#d1d1d1')
+alliesAndOrgsLbl = Label(featuresAndTraitsWin, text="Allies & Organizations", bg=get_sec_init_color_2())
 alliesandOrgsBox = Text(featuresAndTraitsWin, height=20, width=25)
-copperLbl = Label(featuresAndTraitsWin, text="Copper", bg='#d1d1d1')
+copperLbl = Label(featuresAndTraitsWin, text="Copper", bg=get_sec_init_color_2())
 copperField = Entry(featuresAndTraitsWin)
-silverLbl = Label(featuresAndTraitsWin, text="Silver", bg='#d1d1d1')
+silverLbl = Label(featuresAndTraitsWin, text="Silver", bg=get_sec_init_color_2())
 silverField = Entry(featuresAndTraitsWin)
-electrumLbl = Label(featuresAndTraitsWin, text="Electrum", bg='#d1d1d1')
+electrumLbl = Label(featuresAndTraitsWin, text="Electrum", bg=get_sec_init_color_2())
 electrumField = Entry(featuresAndTraitsWin)
-goldLbl = Label(featuresAndTraitsWin, text="Gold", bg='#d1d1d1')
+goldLbl = Label(featuresAndTraitsWin, text="Gold", bg=get_sec_init_color_2())
 goldField = Entry(featuresAndTraitsWin)
-platinumLbl = Label(featuresAndTraitsWin, text="Platinum", bg='#d1d1d1')
+platinumLbl = Label(featuresAndTraitsWin, text="Platinum", bg=get_sec_init_color_2())
 platinumField = Entry(featuresAndTraitsWin)
-equipmentLbl = Label(featuresAndTraitsWin, text="Equipment", bg='#d1d1d1')
+equipmentLbl = Label(featuresAndTraitsWin, text="Equipment", bg=get_sec_init_color_2())
 equipmentBox = Text(featuresAndTraitsWin, height=38, width=25)
-treasureLbl = Label(featuresAndTraitsWin, text="Treasure", bg='#d1d1d1')
+treasureLbl = Label(featuresAndTraitsWin, text="Treasure", bg=get_sec_init_color_2())
 treasureBox = Text(featuresAndTraitsWin, height=38, width=25)
-miscLbl = Label(featuresAndTraitsWin, text="Misc", bg='#d1d1d1')
+miscLbl = Label(featuresAndTraitsWin, text="Misc", bg=get_sec_init_color_2())
 miscBox = Text(featuresAndTraitsWin, height=38, width=25)
 
 """Secondary Page elements placements"""
@@ -1728,6 +1896,8 @@ flawsLbl.place(x=265, y=230)
 flawsBox.place(x=265, y=250)
 otherProfLanguagesLbl.place(x=15, y=340)
 otherProfLanguagesBox.place(x=15, y=360)
+hexColorLbl2.place(x=15, y=700)
+hexColorField2.place(x=150,y=700)
 alliesAndOrgsLbl.place(x=265, y=340)
 alliesandOrgsBox.place(x=265, y=360)
 copperLbl.place(x=835, y=15)
