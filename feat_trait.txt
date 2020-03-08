@@ -10,8 +10,36 @@ Celestial Resistance
 Healing Hands
 Light Bearer
 Ritual Casting
-Bardic Inspiration
+Bardic Inspiration (d12)
 Jack of All Trades
-Song of Rest
+Song of Rest (1d12)
 Crossbow Expert
-Instrument: Dope rhymes
+Font of Inspiration
+Countercharm
+Advantage on Stealth in Forest and    Swamp areas (from my armor)
+Temporary troll hitpoints(10)
+War Caster
+Dark Vision
+Fey Ancestory
+Light Bearer
+Healing Hands
+Lucky
+Free Instrument Concentration
+UnerwaterBreathing (from eating Hydra)
+Peerless Skill
+Alert
+Main Instrument: Dope rhymes
+Frightening Presence
+
+
+Resistant to Nectrotic
+Resistant to Radient
+Immune to Fire(thordak)
+Resistance to Acid(tattoo)
+Resistance to Force(tattoo)
+Resistance to Psychic(tattoo)
+Resistance to Lightning(tattoo)
+Resistance to Poison(tattoo)
+Resistance to Cold(tattoo)
+
+

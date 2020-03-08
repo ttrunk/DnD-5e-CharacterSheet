@@ -1,1 +1,1 @@
-15|+3|30||27|20|4|1d8|2|false|false|false|false|false|false
+19|+9|30||163|88|0/10|1d8|17|false|false|false|false|false|false

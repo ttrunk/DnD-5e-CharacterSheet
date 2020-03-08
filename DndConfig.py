@@ -69,6 +69,16 @@ class DnDConfig:
         all_org = os.path.join(userDir, 'DnD-5e-CharacterSheet/all_org.txt')
         return all_org
 
+    def color_file(string):
+        userDir = os.path.abspath(os.pardir)
+        color = os.path.join(userDir, 'DnD-5e-CharacterSheet/color.txt')
+        return color
+
+    def color_file_2(string):
+        userDir = os.path.abspath(os.pardir)
+        color2 = os.path.join(userDir, 'DnD-5e-CharacterSheet/color2.txt')
+        return color2
+
     def feat_trait_file(string):
         userDir = os.path.abspath(os.pardir)
         feat_trait = os.path.join(userDir, 'DnD-5e-CharacterSheet/feat_trait.txt')
@@ -93,6 +103,11 @@ class DnDConfig:
         userDir = os.path.abspath(os.pardir)
         other = os.path.join(userDir, 'DnD-5e-CharacterSheet/other.txt')
         return other
+
+    def image_file(string):
+        userDir = os.path.abspath(os.pardir)
+        image = os.path.join(userDir, 'DnD-5e-CharacterSheet/image.txt')
+        return image
 
 
 

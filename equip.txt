@@ -1,20 +1,49 @@
-Studded Leather Armor
+Lizard Scale Studded     Leather Armor +2
+cloak of displacement*
+Fochlucan Bandor*
+ring of feather falling*
+slipper of splider climb*
+Staff of Charming*
+Rod of Absorbtion*(8)
+Rod of Alertness*
+Mythcarver*
+Headband of intellect*
+Amulet of Health*
+bag of holding
+Crystal Ball
+Rope of Entaglement
+fermenting blackberry    drank
+Horn of Blasting
+bronze horn of valhalla
+circlet of blasting
+pipes of haunting
+mariners armor
+red liquid from fountain
+potion of undead         protection x2
 Bottle of black ink
 Quill
 Small Knife
-
-Qustion/Riddle from a dead colleague I have not been able to answer yet.
-
-Common Clothes
-Rapier
-Dagger
-Pistol
- 
+squid
+------------
+Boon of Luck:
+2 d10's I can use for    Saving Throw.            Attack Roll.             Ability Check.
+-------------- 
+Sudde: prof for 1 hour)
+char - pink x1
+wis - white x2 
+int - green x0
+cont - yellow x0
+str - red x0
+dex - blue x0
+--------------- 
 Entertainers Pack:
 Backpack
 Bedroll
 2 costumes
 5 candles
 5 days of Rations
+2 potion of healing
 Waterskin
 Disguise kit
+Common Clothes
+

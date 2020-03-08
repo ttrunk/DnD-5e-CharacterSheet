@@ -1,1 +1,1 @@
-Pistol|Rapier|Dagger|||+5 (range 30/90)|+5|+5 (range (20/40)|||1d10 +3|1d8 +3|1d4 +3||
+Pistol|Whip Rapier +1|Mythcarver +3|Blunderbuss+2|Claw(bonus action)|+10(range 30/90)|+12|+14|+12(range 30/100) |+11|1d10 +4|1d8/1d6 + 1d4 cold +6 |1d8 +5 +3|1d12 +4 + 2|1d8 +5

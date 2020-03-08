@@ -1,13 +1,48 @@
-Can cast 4 spells a day.
+Instruments of the Bard  (7/7):
+Fochlucan Bandor: 
+entangle 
+fairy fire
+shalalee
+speak with animals
 
-Cantrips:
-Minor Illusion
-Viscous Mockery
+Canith Mandolin:
+Cure Wounds(3rd lvl)
+Dispell Magic
+Protection From Energy   (lighting only)
 
-Level 1 Spells:
-Identify
-Thunderwave
+Doslute:
+animal friendship
+protection from energy   (fire only)
+Protection from poison
+
+Mac-fuirmidh cittern:
+cure wounds (1st lvl)
+bark skin
+fog cloud
+
+Cli Lyre:
+Wind Wall
+Wall of Fire
+Shape Stone
+
+Anstruth Harp: 
+Control weather
+cure wounds (5th lvl)
+wall of thorns
+
+Ollamh Harp:
+Confusion
+Control Weather
+Fire Storm
+
+Fochlucan Bandore:
+Entangle
 Faerie Fire
-Bane
-Detect Magic
-Cure Wounds
+Shillelagh
+Speak with Animals
+
+Extra (from having all):
+Fly
+Invisibility
+Levitate
+Protection from Evil&Good

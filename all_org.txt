@@ -1,2 +1,14 @@
-Sera-Phina
-(Female and motherly voice that is hopeful and encouraging we will find a way to stop the undead problem)
+Berry Black
+
+Blink Dog: (B-link)
+teleport up to 40 up ft.
+beggining of turn gets toroll for recharge. 
+1d6  4 - 6 succeeds. 
+Bite: +3 to hit (1d6+1)  Can teleport same turn.
+Resistance to Crit       (adamnatine armor) 
+Advantage on wisdom      checks (hearing or smell)
+Speed: 40
+HP:22
+AC:13
+str 12 dex 17 con 12
+int 10 wis 13 cha 11
