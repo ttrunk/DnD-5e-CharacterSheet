@@ -16,10 +16,10 @@ def get_init_color():
     color_file = my_file_config.color_file()
 
     init_color_file = open(color_file, 'r+')
-
     color = init_color_file.read()
     if color == "":
         color = 'grey'
+    init_color_file.close()
     return color
 
 
@@ -35,6 +35,7 @@ def get_init_color_2():
     color2 = init_color_file_2.read()
     if color2 == "":
         color2 = 'grey'
+    init_color_file_2.close()
     return color2
 
 def get_init_image():
@@ -47,6 +48,7 @@ def get_init_image():
     init_image_file = open(image_file, 'r+')
 
     img = init_image_file.read()
+    init_image_file.close()
     return img
 
 
@@ -156,6 +158,7 @@ def save_character_traits():
                                           + "|" + playerNameEntry + "|" + profBonusEntry + "|" + raceEntry + "|"
                                           + alignmentEntry + "|" + xpEntry)
         write_character_traits_file.flush()
+        write_character_traits_file.close()
 
 
 def get_character_traits():
@@ -208,6 +211,7 @@ def save_ability_score():
                                        + intAttFieldEntry + "|" + intModFieldEntry + "|" + wisAttFieldEntry + "|"
                                        + wisModFieldEntry + "|" + charAttFieldEntry + "|" + charModFieldEntry)
         write_ability_score_file.flush()
+        write_ability_score_file.close()
 
 
 def get_ability_score():
@@ -296,6 +300,7 @@ def save_saving_throw_score():
                                             + wisSavingThrowFieldEntry + "|" + wisCheckButtonEntryValue + "|"
                                             + charSavingThrowFieldEntry + "|" + charCheckButtonEntryValue)
         write_saving_throw_score_file.flush()
+        write_saving_throw_score_file.close()
 
 def get_saving_throw_score():
     """
@@ -489,6 +494,7 @@ def save_skill_score():
                                      + stealthCheckButtonEntryValue + "|" + survivalFieldEntry + "|"
                                      + survivalCheckButtonEntryValue + '|' + passiveWisdomFieldEntry)
         write_skill_score_file.flush()
+        write_skill_score_file.close()
 
 
 def get_skill_score():
@@ -626,6 +632,7 @@ def save_battle_stats():
                                       + '|' + successCheckButton3EntryValue + '|' + failCheckButton1EntryValue + '|'
                                       + failCheckButton2EntryValue + '|' + failCheckButton3EntryValue)
         write_battle_stats_file.flush()
+        write_battle_stats_file.close()
 
 
 def get_battle_stats():
@@ -700,6 +707,7 @@ def save_attack_stats():
                                       + attackDamageTypeField3Entry + '|' + attackDamageTypeField4Entry + '|'
                                       + attackDamageTypeField5Entry)
         write_attack_stats_file.flush()
+        write_attack_stats_file.close()
 
 
 def get_attack_stats():
@@ -746,6 +754,7 @@ def save_attack_notes():
         write_attack_notes_file.truncate()
         write_attack_notes_file.write(attackNotesBoxEntry)
         write_attack_notes_file.flush()
+        write_attack_notes_file.close()
 
 
 def get_attack_notes():
@@ -757,6 +766,7 @@ def get_attack_notes():
     init_attack_notes_file = open(attack_notes_file, "r+")
     attack_notes = init_attack_notes_file.read()
     attackNotesBox.insert(END, attack_notes)
+    init_attack_notes_file.close()
     return attack_notes
 
 def save_per_traits():
@@ -772,6 +782,7 @@ def save_per_traits():
         write_per_traits_file.truncate()
         write_per_traits_file.write(perTraitsEntry)
         write_per_traits_file.flush()
+        write_per_traits_file.close()
 
 
 def get_per_traits():
@@ -785,6 +796,7 @@ def get_per_traits():
 
     per_traits = init_per_traits_file.read()
     personalityTraitsBox.insert(END, per_traits)
+    init_per_traits_file.close()
 
 def save_bonds():
     """
@@ -799,6 +811,7 @@ def save_bonds():
         write_bonds_file.truncate()
         write_bonds_file.write(bondsEntry)
         write_bonds_file.flush()
+        write_bonds_file.close()
 
 def get_bonds():
     """
@@ -811,6 +824,7 @@ def get_bonds():
 
     bonds = init_bonds_file.read()
     bondsBox.insert(END, bonds)
+    init_bonds_file.close()
 
 def save_ideals():
     """
@@ -825,6 +839,7 @@ def save_ideals():
         write_ideals_file.truncate()
         write_ideals_file.write(idealsEntry)
         write_ideals_file.flush()
+        write_ideals_file.close()
 
 def get_ideals():
     """
@@ -837,6 +852,7 @@ def get_ideals():
 
     ideals = init_ideals_file.read()
     idealsBox.insert(END, ideals)
+    init_ideals_file.close()
 
 def save_flaws():
     """
@@ -851,6 +867,7 @@ def save_flaws():
         write_flaws_file.truncate()
         write_flaws_file.write(flawsEntry)
         write_flaws_file.flush()
+        write_flaws_file.close()
 
 def get_flaws():
     """
@@ -863,6 +880,7 @@ def get_flaws():
 
     flaws = init_flaws_file.read()
     flawsBox.insert(END, flaws)
+    init_flaws_file.close()
 
 def save_prof_lang():
     """
@@ -877,6 +895,7 @@ def save_prof_lang():
         write_prof_lang_file.truncate()
         write_prof_lang_file.write(prof_langEntry)
         write_prof_lang_file.flush()
+        write_prof_lang_file.close()
 
 def get_prof_lang():
     """
@@ -889,6 +908,7 @@ def get_prof_lang():
 
     prof_lang = init_prof_lang_file.read()
     otherProfLanguagesBox.insert(END, prof_lang)
+    init_prof_lang_file.close()
 
 def save_all_org():
     """
@@ -903,6 +923,7 @@ def save_all_org():
         write_all_org_file.truncate()
         write_all_org_file.write(all_orgEntry)
         write_all_org_file.flush()
+        write_all_org_file.close()
 
 def get_all_org():
     """
@@ -915,6 +936,7 @@ def get_all_org():
 
     all_org = init_all_org_file.read()
     alliesandOrgsBox.insert(END, all_org)
+    init_all_org_file.close()
 
 def save_image():
     """
@@ -929,6 +951,7 @@ def save_image():
         write_image_file.truncate()
         write_image_file.write(image_path)
         write_image_file.flush()
+        write_image_file.close()
 
 def get_image():
     """
@@ -942,6 +965,7 @@ def get_image():
     image_path = init_image_file.read()
 
     imagePath.insert(END, image_path)
+    init_image_file.close()
 
 
 def save_color():
@@ -959,6 +983,7 @@ def save_color():
             write_color_file.truncate()
             write_color_file.write(hexval1)
             write_color_file.flush()
+            write_color_file.close()
     else:
         messagebox.showerror("Error", "Not a valid Hex value. New value not saved. Old value retained.")
 
@@ -969,6 +994,7 @@ def save_color():
             write_color_file_2.truncate()
             write_color_file_2.write(hexval2)
             write_color_file_2.flush()
+            write_color_file_2.close()
     else:
         messagebox.showerror("Error", "Not a valid Hex value. New value not saved. Old value retained2.")
 
@@ -987,6 +1013,8 @@ def get_color():
     color2 = init_color_file_2.read()
     hexColorField1.insert(END, color)
     hexColorField2.insert(END, color2)
+    init_color_file.close()
+    init_color_file_2.close()
 
 def get_sec_init_color():
     """
@@ -1000,6 +1028,7 @@ def get_sec_init_color():
     color = init_color_file.read()
     if color == "":
         color = 'grey'
+    init_color_file.close()
     return color
 
 def get_sec_init_color_2():
@@ -1014,6 +1043,7 @@ def get_sec_init_color_2():
     color2 = init_color_file_2.read()
     if color2 == "":
         color2 = 'grey'
+    init_color_file_2.close()
     return color2
 
 
@@ -1030,6 +1060,7 @@ def save_feat_trait():
         write_feat_trait_file.truncate()
         write_feat_trait_file.write(feat_traitEntry)
         write_feat_trait_file.flush()
+        write_feat_trait_file.close()
 
 def get_feat_trait():
     """
@@ -1042,6 +1073,7 @@ def get_feat_trait():
 
     feat_trait = init_feat_trait_file.read()
     featuresAndTraitsBox.insert(END, feat_trait)
+    init_feat_trait_file.close()
 
 def save_equip():
     """
@@ -1056,6 +1088,7 @@ def save_equip():
         write_equip_file.truncate()
         write_equip_file.write(equipEntry)
         write_equip_file.flush()
+        write_equip_file.close()
 
 def get_equip():
     """
@@ -1068,6 +1101,7 @@ def get_equip():
 
     equip = init_equip_file.read()
     equipmentBox.insert(END, equip)
+    init_equip_file.close()
 
 def save_treasure():
     """
@@ -1082,6 +1116,7 @@ def save_treasure():
         write_treasure_file.truncate()
         write_treasure_file.write(treasureEntry)
         write_treasure_file.flush()
+        write_treasure_file.close()
 
 def get_treasure():
     """
@@ -1094,6 +1129,7 @@ def get_treasure():
 
     treasure = init_treasure_file.read()
     treasureBox.insert(END, treasure)
+    init_treasure_file.close()
 
 def save_misc():
     """
@@ -1108,6 +1144,7 @@ def save_misc():
         write_misc_file.truncate()
         write_misc_file.write(miscEntry)
         write_misc_file.flush()
+        write_misc_file.close()
 
 def get_misc():
     """
@@ -1120,6 +1157,7 @@ def get_misc():
 
     misc = init_misc_file.read()
     miscBox.insert(END, misc)
+    init_misc_file.close()
 
 def save_other():
     """
@@ -1146,6 +1184,7 @@ def save_other():
                                + '|' + hairEntry + '|' + copperEntry + '|' + silverEntry + '|' + electrumEntry + '|'
                                + goldEntry + '|' + platinumEntry)
         write_other_file.flush()
+        write_other_file.close()
 
 def get_other():
     """
